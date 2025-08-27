@@ -13,11 +13,15 @@ function App() {
     const [modalOpen, setModalOpen] = useState(false)
     const [modalData, setModalData] = useState(null)
 
-    const handleSearch = async (query) => {
+    const [query, setQuery] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPages, setTotalPages] = useState(1)
+
+    const performSearch = async (q, page = 1) => {
         try {
             setIsListLoading(true)
             setError(null)
-            const response = await api.getSearchResponse(query)
+            const response = await api.getSearchResponse(q, page)
             if (response?.Response === 'True' && Array.isArray(response.Search)) {
                 const seen = new Set()
                 const unique = []
@@ -28,8 +32,11 @@ function App() {
                     }
                 }
                 setResults(unique)
+                const totalResults = Number(response.totalResults || 0)
+                setTotalPages(Math.max(1, Math.ceil(totalResults / 10)))
             } else {
                 setResults([])
+                setTotalPages(1)
                 setError(response?.Error || 'No results found')
             }
         } catch (e) {
@@ -37,6 +44,18 @@ function App() {
         } finally {
             setIsListLoading(false)
         }
+    }
+
+    const handleSearch = async (q) => {
+        setQuery(q)
+        setCurrentPage(1)
+        await performSearch(q, 1)
+    }
+
+    const goToPage = async (page) => {
+        if (page < 1 || page > totalPages || page === currentPage) return
+        setCurrentPage(page)
+        await performSearch(query, page)
     }
 
     const handleSelect = useCallback(async (imdbID) => {
@@ -54,7 +73,10 @@ function App() {
     }, [])
 
     useEffect(() => {
-        handleSearch('batman')
+        (async () => {
+            setQuery('batman')
+            await performSearch('batman', 1)
+        })()
     }, [])
 
     return (
@@ -74,7 +96,22 @@ function App() {
                 )}
 
                 {results.length > 0 && (
-                    <MoviesGrid items={results} onSelect={handleSelect} />
+                    <>
+                        <MoviesGrid items={results} onSelect={handleSelect} />
+                        <nav className="mt-4" aria-label="Pagination">
+                            <ul className="pagination justify-content-center">
+                                <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                                    <button className="page-link" onClick={() => goToPage(currentPage - 1)}>Prev</button>
+                                </li>
+                                <li className="page-item disabled">
+                                    <span className="page-link">Page {currentPage} / {totalPages}</span>
+                                </li>
+                                <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+                                    <button className="page-link" onClick={() => goToPage(currentPage + 1)}>Next</button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </>
                 )}
             </div>
 

@@ -1,5 +1,5 @@
 import mockMovie from "@/mocks/movie.json"
-
+import no_image from "@assets/no-image.jpg"
 export default function DetailsModal({ open, onClose, data, loading }) {
     if (!open) return null
     const movie = data || mockMovie
@@ -48,7 +48,9 @@ export default function DetailsModal({ open, onClose, data, loading }) {
                         ) : (
                             <div className="row g-3">
                                 <div className="col-12 col-md-4">
-                                    {Poster && <img src={Poster} className="img-fluid rounded" alt={Title || 'Poster'} />}
+                                    {Poster && <img src={Poster} className="img-fluid rounded" alt={Title || 'Poster'} onError={(e) => {
+                                        e.target.src = no_image
+                                    }}/>}
                                 </div>
                                 <div className="col-12 col-md-8">
                                     <strong>

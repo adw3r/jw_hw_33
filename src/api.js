@@ -3,8 +3,8 @@ import {API_KEY} from "@/config.js";
 export class Api {
     __base_url = `https://www.omdbapi.com/?apikey=${API_KEY}&`;
 
-    async getSearchResponse(search = '') {
-        const response = await fetch(this.__base_url + `s=${encodeURIComponent(search)}`)
+    async getSearchResponse(search = '', page = 1) {
+        const response = await fetch(this.__base_url + `s=${encodeURIComponent(search)}&page=${encodeURIComponent(page)}`)
         return await response.json();
     }
 
