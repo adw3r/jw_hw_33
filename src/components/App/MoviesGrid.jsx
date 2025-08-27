@@ -1,4 +1,4 @@
-import Movie from "./Movie/Movie.jsx";
+import Movie from "./Movie.jsx";
 
 export default function MoviesGrid({ items, onSelect }) {
     if (!Array.isArray(items) || items.length === 0) return null

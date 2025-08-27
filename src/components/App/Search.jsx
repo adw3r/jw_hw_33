@@ -1,4 +1,3 @@
-import './style.scss'
 
 export default function Search({ onSearch }) {
     const onSubmit = async (e) => {

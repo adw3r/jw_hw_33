@@ -5,3 +5,11 @@
   text-align: center;
 }
 
+.movie-card {
+  min-height: 100%;
+}
+
+.ratio-2x3 {
+  --bs-aspect-ratio: calc(3 / 2 * 100%);
+}
+

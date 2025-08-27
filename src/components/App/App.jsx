@@ -1,6 +1,6 @@
 import './App.scss'
 import {useEffect, useState, useCallback} from "react";
-import Search from "./Search/Search.jsx";
+import Search from "./Search.jsx";
 import api from "@/api.js";
 import DetailsModal from "./DetailsModal.jsx";
 import MoviesGrid from "./MoviesGrid.jsx";
