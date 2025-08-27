@@ -1,10 +1,9 @@
 import './style.scss'
-import api from "@/api.js"
 import no_image from "@/assets/no-image.jpg"
+import { memo } from 'react'
 
-export default function Movie({ data }) {
+function MovieComponent({ data, onSelect }) {
     if (!data) return null
-    console.log(data)
     const {
         Title,
         Poster,
@@ -14,11 +13,8 @@ export default function Movie({ data }) {
     } = data
 
     return (
-        <div className="card shadow-sm" onClick={async (e) => {
-            let resp = await api.getById(imdbID).then()
-            console.log(resp)
-        }}>
-            <img src={Poster} className="card-img-top" alt={Title || 'Poster'} onError={(e) => {
+        <div className="card shadow-sm" role="button" onClick={() => onSelect && onSelect(imdbID)}>
+            <img src={Poster} loading="lazy" className="card-img-top" alt={Title || 'Poster'} onError={(e) => {
                 e.target.src = no_image
             }}/>
             <div className="card-body d-flex flex-column" >
@@ -31,3 +27,6 @@ export default function Movie({ data }) {
         </div>
     )
 }
+
+const Movie = memo(MovieComponent)
+export default Movie

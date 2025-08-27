@@ -1,21 +1,33 @@
 import './App.scss'
-import {useEffect, useState} from "react";
+import {useEffect, useState, useCallback} from "react";
 import Search from "./Search/Search.jsx";
 import api from "@/api.js";
-import Movie from "./Movie/Movie.jsx";
+import DetailsModal from "./DetailsModal.jsx";
+import MoviesGrid from "./MoviesGrid.jsx";
 
 function App() {
     const [results, setResults] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
+    const [isListLoading, setIsListLoading] = useState(false)
+    const [isDetailLoading, setIsDetailLoading] = useState(false)
     const [error, setError] = useState(null)
+    const [modalOpen, setModalOpen] = useState(false)
+    const [modalData, setModalData] = useState(null)
 
     const handleSearch = async (query) => {
         try {
-            setIsLoading(true)
+            setIsListLoading(true)
             setError(null)
             const response = await api.getSearchResponse(query)
             if (response?.Response === 'True' && Array.isArray(response.Search)) {
-                setResults(response.Search)
+                const seen = new Set()
+                const unique = []
+                for (const item of response.Search) {
+                    if (!seen.has(item.imdbID)) {
+                        seen.add(item.imdbID)
+                        unique.push(item)
+                    }
+                }
+                setResults(unique)
             } else {
                 setResults([])
                 setError(response?.Error || 'No results found')
@@ -23,9 +35,23 @@ function App() {
         } catch (e) {
             setError(e?.message || 'Request failed')
         } finally {
-            setIsLoading(false)
+            setIsListLoading(false)
         }
     }
+
+    const handleSelect = useCallback(async (imdbID) => {
+        try {
+            setModalOpen(true)
+            setIsDetailLoading(true)
+            setError(null)
+            const detail = await api.getById(imdbID)
+            setModalData(detail)
+        } catch (e) {
+            setError(e?.message || 'Failed to load details')
+        } finally {
+            setIsDetailLoading(false)
+        }
+    }, [])
 
     useEffect(() => {
         handleSearch('batman')
@@ -35,7 +61,7 @@ function App() {
         <>
             <Search onSearch={handleSearch}/>
             <div className="container py-4">
-                {isLoading && (
+                {isListLoading && (
                     <div className="d-flex justify-content-center py-5">
                         <div className="spinner-border" role="status">
                             <span className="visually-hidden">Loading...</span>
@@ -47,17 +73,12 @@ function App() {
                     <div className="alert alert-warning" role="alert">{error}</div>
                 )}
 
-                {!isLoading && !error && results.length > 0 && (
-                    <div className="row g-3">
-                        {results.map((movie) => (
-                            <div className="col-12 col-sm-6 col-md-4 col-lg-3" >
-                                <Movie data={movie} />
-                            </div>
-                        ))}
-                    </div>
+                {results.length > 0 && (
+                    <MoviesGrid items={results} onSelect={handleSelect} />
                 )}
-
             </div>
+
+            <DetailsModal open={modalOpen} onClose={() => setModalOpen(false)} data={modalData} loading={isDetailLoading} />
         </>
     )
 }
