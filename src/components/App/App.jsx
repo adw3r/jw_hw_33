@@ -1,5 +1,6 @@
+import React from "react";
 import './App.scss'
-import {useEffect, useState, useCallback} from "react";
+import {useCallback, useEffect, useState} from "react";
 import Search from "./Search.jsx";
 import api from "@/api.js";
 import DetailsModal from "./DetailsModal.jsx";
@@ -97,17 +98,19 @@ function App() {
 
                 {results.length > 0 && (
                     <>
-                        <MoviesGrid items={results} onSelect={handleSelect} />
+                        <MoviesGrid items={results} onSelect={handleSelect}/>
                         <nav className="mt-4" aria-label="Pagination">
                             <ul className="pagination justify-content-center">
                                 <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                                    <button className="page-link" onClick={() => goToPage(currentPage - 1)}>Prev</button>
+                                    <button className="page-link" onClick={() => goToPage(currentPage - 1)}>Prev
+                                    </button>
                                 </li>
                                 <li className="page-item disabled">
                                     <span className="page-link">Page {currentPage} / {totalPages}</span>
                                 </li>
                                 <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                                    <button className="page-link" onClick={() => goToPage(currentPage + 1)}>Next</button>
+                                    <button className="page-link" onClick={() => goToPage(currentPage + 1)}>Next
+                                    </button>
                                 </li>
                             </ul>
                         </nav>
@@ -115,7 +118,8 @@ function App() {
                 )}
             </div>
 
-            <DetailsModal open={modalOpen} onClose={() => setModalOpen(false)} data={modalData} loading={isDetailLoading} />
+            <DetailsModal open={modalOpen} onClose={() => setModalOpen(false)} data={modalData}
+                          loading={isDetailLoading}/>
         </>
     )
 }
