@@ -13,15 +13,6 @@
   --bs-aspect-ratio: calc(3 / 2 * 100%);
 }
 
-.search-sticky {
-  //position: absolute;
-  //top: 0;
-  //
-  //z-index: 1020; /* above content, below modals */
-  // background: white; /* fallback for dark bg; adjust if needed */
-  //width: 100vwh;
-}
-
 .skeleton-card {
   position: relative;
   overflow: hidden;
@@ -38,10 +29,10 @@
   width: 150%;
   height: 100%;
   background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.12) 50%,
-    rgba(255, 255, 255, 0) 100%
+                  90deg,
+                  rgba(255, 255, 255, 0) 0%,
+                  rgba(255, 255, 255, 0.12) 50%,
+                  rgba(255, 255, 255, 0) 100%
   );
   animation: shimmer 1.3s linear infinite;
   pointer-events: none;
@@ -52,13 +43,23 @@
 }
 
 @keyframes glow {
-  0% { box-shadow: 0 0 6px rgba(99, 102, 241, 0.20); }
-  50% { box-shadow: 0 0 22px rgba(99, 102, 241, 0.45); }
-  100% { box-shadow: 0 0 6px rgba(99, 102, 241, 0.20); }
+  0% {
+    box-shadow: 0 0 6px rgba(99, 102, 241, 0.20);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(99, 102, 241, 0.45);
+  }
+  100% {
+    box-shadow: 0 0 6px rgba(99, 102, 241, 0.20);
+  }
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 

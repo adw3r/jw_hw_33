@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import path from 'path';
 
 export default defineConfig({
+    // Update to your repository name when deploying to GitHub Pages project site
     base: '',
     resolve: {
         alias: {

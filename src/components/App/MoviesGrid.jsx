@@ -13,5 +13,3 @@ export default function MoviesGrid({items, onSelect}) {
         </div>
     )
 }
-
-

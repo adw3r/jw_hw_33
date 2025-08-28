@@ -32,38 +32,40 @@ export default function DetailsModal({open, onClose, data, loading}) {
         if (e.target === e.currentTarget) onClose && onClose()
     }
 
-    return (<div className="modal d-block" tabIndex="-1" role="dialog" style={{backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 1050}}
+    return (<div className="modal d-block" tabIndex="-1" role="dialog"
+                 style={{backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 1050}}
                  onClick={handleBackdrop}>
         <div className="modal-dialog modal-lg" role="document">
             <div className="modal-content">
                 <div className="modal-header">
-                    <h5 className="modal-title">{loading ? (<Skeleton width={200} height={24} />) : (Title || 'Details')}</h5>
+                    <h5 className="modal-title">{loading ? (
+                        <Skeleton width={200} height={24}/>) : (Title || 'Details')}</h5>
                     <button type="button" className="btn-close" aria-label="Close" onClick={onClose}></button>
                 </div>
                 <div className="modal-body text-start">
                     {loading ? (
                         <div className="row g-3">
                             <div className="col-12 col-md-4">
-                                <Skeleton height={400} className="w-100 rounded" />
+                                <Skeleton height={400} className="w-100 rounded"/>
                             </div>
                             <div className="col-12 col-md-8">
-                                <Skeleton height={20} width={120} className="mb-2" />
-                                <Skeleton count={3} className="mb-3" />
-                                <Skeleton height={14} width={180} className="mb-3" />
+                                <Skeleton height={20} width={120} className="mb-2"/>
+                                <Skeleton count={3} className="mb-3"/>
+                                <Skeleton height={14} width={180} className="mb-3"/>
                                 <div className="row g-2">
-                                    <div className="col-6"><Skeleton height={14} /></div>
-                                    <div className="col-6"><Skeleton height={14} /></div>
-                                    <div className="col-12"><Skeleton height={14} /></div>
-                                    <div className="col-12"><Skeleton height={14} /></div>
-                                    <div className="col-12"><Skeleton height={14} /></div>
-                                    <div className="col-6"><Skeleton height={14} /></div>
-                                    <div className="col-6"><Skeleton height={14} /></div>
-                                    <div className="col-12"><Skeleton height={14} /></div>
+                                    <div className="col-6"><Skeleton height={14}/></div>
+                                    <div className="col-6"><Skeleton height={14}/></div>
+                                    <div className="col-12"><Skeleton height={14}/></div>
+                                    <div className="col-12"><Skeleton height={14}/></div>
+                                    <div className="col-12"><Skeleton height={14}/></div>
+                                    <div className="col-6"><Skeleton height={14}/></div>
+                                    <div className="col-6"><Skeleton height={14}/></div>
+                                    <div className="col-12"><Skeleton height={14}/></div>
                                 </div>
                                 <ul className="list-group list-group-flush mt-3">
-                                    <li className="list-group-item"><Skeleton height={14} /></li>
-                                    <li className="list-group-item"><Skeleton height={14} /></li>
-                                    <li className="list-group-item"><Skeleton height={14} /></li>
+                                    <li className="list-group-item"><Skeleton height={14}/></li>
+                                    <li className="list-group-item"><Skeleton height={14}/></li>
+                                    <li className="list-group-item"><Skeleton height={14}/></li>
                                 </ul>
                             </div>
                         </div>

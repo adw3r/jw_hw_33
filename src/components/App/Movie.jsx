@@ -1,6 +1,5 @@
-import React from "react";
+import React, {memo} from "react";
 import no_image from "@assets/no-image.jpg"
-import {memo} from 'react'
 
 function MovieComponent({data, onSelect}) {
     if (!data) return null

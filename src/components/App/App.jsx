@@ -1,6 +1,5 @@
-import React from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import './App.scss'
-import {useCallback, useEffect, useState} from "react";
 import Search from "./Search.jsx";
 import api from "@/api.js";
 import DetailsModal from "./DetailsModal.jsx";
@@ -86,7 +85,7 @@ function App() {
             <Search onSearch={handleSearch}/>
             <div className="container-fluid py-4 col-12" style={{minHeight: 'calc(100vh - 100px)'}}>
                 {isListLoading && (
-                    <MoviesSkeletonGrid count={8} />
+                    <MoviesSkeletonGrid count={8}/>
                 )}
 
                 {error && (
