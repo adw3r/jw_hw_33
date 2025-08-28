@@ -8,7 +8,7 @@ export default function Search({onSearch}) {
             await onSearch(query)
         }
     }
-    return (<div className="container-fluid py-4 d-flex flex-column gap-2">
+    return (<div className="container py-4 d-flex flex-column gap-2 search-sticky">
             <h2 className="text-center">Search</h2>
             <form onSubmit={onSubmit} className="d-flex gap-2">
                 <input name="search" type="text" className="form-control" placeholder="Search..."/>

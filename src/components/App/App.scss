@@ -13,6 +13,15 @@
   --bs-aspect-ratio: calc(3 / 2 * 100%);
 }
 
+.search-sticky {
+  //position: absolute;
+  //top: 0;
+  //
+  //z-index: 1020; /* above content, below modals */
+  // background: white; /* fallback for dark bg; adjust if needed */
+  //width: 100vwh;
+}
+
 .skeleton-card {
   position: relative;
   overflow: hidden;
