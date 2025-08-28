@@ -24,13 +24,13 @@ export default function DetailsModal({open, onClose, data, loading}) {
         imdbVotes,
         BoxOffice,
         Website
-    } = data
+    } = data || {}
 
     const handleBackdrop = (e) => {
         if (e.target === e.currentTarget) onClose && onClose()
     }
 
-    return (<div className="modal d-block" tabIndex="-1" role="dialog" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}
+    return (<div className="modal d-block" tabIndex="-1" role="dialog" style={{backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 1050}}
                  onClick={handleBackdrop}>
         <div className="modal-dialog modal-lg" role="document">
             <div className="modal-content">
