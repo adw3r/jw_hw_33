@@ -84,7 +84,7 @@ function App() {
     return (
         <>
             <Search onSearch={handleSearch}/>
-            <div className="container-fluid py-4 col-12">
+            <div className="container-fluid py-4 col-12" style={{minHeight: 'calc(100vh - 100px)'}}>
                 {isListLoading && (
                     <MoviesSkeletonGrid count={8} />
                 )}
