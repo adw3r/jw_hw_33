@@ -13,3 +13,43 @@
   --bs-aspect-ratio: calc(3 / 2 * 100%);
 }
 
+.skeleton-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.25);
+  animation: glow 1.6s ease-in-out infinite;
+}
+
+.skeleton-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer 1.3s linear infinite;
+  pointer-events: none;
+}
+
+.react-loading-skeleton {
+  border-radius: 0.5rem;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 6px rgba(99, 102, 241, 0.20); }
+  50% { box-shadow: 0 0 22px rgba(99, 102, 241, 0.45); }
+  100% { box-shadow: 0 0 6px rgba(99, 102, 241, 0.20); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+

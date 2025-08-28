@@ -5,6 +5,7 @@ import Search from "./Search.jsx";
 import api from "@/api.js";
 import DetailsModal from "./DetailsModal.jsx";
 import MoviesGrid from "./MoviesGrid.jsx";
+import MoviesSkeletonGrid from "./MoviesSkeletonGrid.jsx";
 
 function App() {
     const [results, setResults] = useState([])
@@ -83,13 +84,9 @@ function App() {
     return (
         <>
             <Search onSearch={handleSearch}/>
-            <div className="container py-4">
+            <div className="container-fluid py-4 col-12">
                 {isListLoading && (
-                    <div className="d-flex justify-content-center py-5">
-                        <div className="spinner-border" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
+                    <MoviesSkeletonGrid count={8} />
                 )}
 
                 {error && (
