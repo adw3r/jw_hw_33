@@ -1,5 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import './App.scss'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import Search from "./Search.jsx";
 import api from "@/api.js";
 import DetailsModal from "./DetailsModal.jsx";
